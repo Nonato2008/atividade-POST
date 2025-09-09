@@ -1,4 +1,4 @@
-// ATIVIDADE 2
+// ATIVIDADE 1
 
 const express = require('express');
 const app =  express();
@@ -17,7 +17,7 @@ app.post("/soma", (req,res)=>{
         if(numUM == "" || numDOIS == "" || numTRES == ""){
             return res.status(400).send(`Campos obrigatórios não preenchidos!`)
         }
-        
+
         let resultado = numUM + numDOIS + numTRES
         
         console.log(`O resultado da sua conta é ${resultado}`);
