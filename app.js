@@ -6,27 +6,29 @@ const PORT = 8081;
 
 app.use(express.json());
 
-app.post("/soma", (req,res)=>{
+app.post("/login", (req,res)=>{
     try {
-        const {soma:{numUM, numDOIS, numTRES}} = req.body;
+        const {usuário, senha} = req.body;
 
-        if(isNaN(numUM, numDOIS, numTRES) || numUM == "undefined" || numDOIS=="undefined" || numTRES == "undefined"){
+        if(!isNaN(usuário) || isNaN(senha) || usuário == "undefined" || senha=="undefined"){ //filtro de erro
             return res.status(400).send(`Campos obrigatórios não preenchidos!`)
         }
 
-        if(numUM == "" || numDOIS == "" || numTRES == ""){
+        if(usuário == "" || senha == ""){//filtro de erro
             return res.status(400).send(`Campos obrigatórios não preenchidos!`)
         }
 
-        let resultado = numUM + numDOIS + numTRES
+        if(usuário != "estudante" || senha != parseInt(2025)){ //comparação da senha fornecida e da existente
+            return res.status(400).send(`Senha ou Usuário incorreto!`)
+        }
         
-        console.log(`O resultado da sua conta é ${resultado}`);
+        console.log(`Usuário: ${usuário} | Senha: ${senha}`); //usuário e senha corretamente fornecidas
 
-        res.status(201).json({ message:'Conta realizada com sucesso'})
+        res.status(201).json({ message:'Acesso concedido!'}) //mensagem de sucesso
 
     } catch (error) {
         console.error("Erro capturado", error);
-        res.status(500).json("Erro interno no servidor!")
+        res.status(500).json("Erro interno do servidor!")
         
     }
 })
