@@ -6,13 +6,23 @@ const PORT = 8081;
 
 app.use(express.json());
 
-app.post("/mensagem", (req,res)=>{
+app.post("/soma", (req,res)=>{
     try {
-        const {nome,idade,time} = req.body;
+        const {soma:{numUM, numDOIS, numTRES}} = req.body;
 
-        console.log(nome,idade,time);
+        if(isNaN(numUM, numDOIS, numTRES) || numUM == "undefined" || numDOIS=="undefined" || numTRES == "undefined"){
+            return res.status(400).send(`Campos obrigatórios não preenchidos!`)
+        }
 
-        res.status(201).json({ message:'Usário criado com sucesso'})
+        if(numUM == "" || numDOIS == "" || numTRES == ""){
+            return res.status(400).send(`Campos obrigatórios não preenchidos!`)
+        }
+        
+        let resultado = numUM + numDOIS + numTRES
+        
+        console.log(`O resultado da sua conta é ${resultado}`);
+
+        res.status(201).json({ message:'Conta realizada com sucesso'})
 
     } catch (error) {
         console.error("Erro capturado", error);
