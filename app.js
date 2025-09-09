@@ -11,18 +11,18 @@ app.post("/soma", (req,res)=>{
         const {soma:{numUM, numDOIS, numTRES}} = req.body;
 
         if(isNaN(numUM, numDOIS, numTRES) || numUM == "undefined" || numDOIS=="undefined" || numTRES == "undefined"){
+            return res.status(400).send(`Campos obrigatórios não preenchidos!`) // filtro de erro e mensagem
+        }
+
+        if(numUM == "" && numDOIS == "" &&  numTRES == ""){ // caso não preencha os números
             return res.status(400).send(`Campos obrigatórios não preenchidos!`)
         }
 
-        if(numUM == "" || numDOIS == "" || numTRES == ""){
-            return res.status(400).send(`Campos obrigatórios não preenchidos!`)
-        }
-
-        let resultado = numUM + numDOIS + numTRES
+        let resultado = numUM + numDOIS + numTRES //variavel para realizar a conta
         
-        console.log(`O resultado da sua conta é ${resultado}`);
+        console.log(`O resultado da sua conta é ${resultado}`); // mensagem do resultado
 
-        res.status(201).json({ message:'Conta realizada com sucesso'})
+        res.status(201).json({ message:'Conta realizada com sucesso'}) //mensagem de sucesso
 
     } catch (error) {
         console.error("Erro capturado", error);
