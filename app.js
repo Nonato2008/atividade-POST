@@ -11,16 +11,16 @@ app.post("/mensagem", (req,res)=>{
         const {nome, idade, time} = req.body;
 
         if(isNaN(idade) || nome == "undefined" || idade=="undefined" || time == "undefined" || !isNaN(nome, time)){
-            return res.status(400).send(`Campos obrigatórios não preenchidos!`)
+            return res.status(400).send(`Campos obrigatórios não preenchidos!`) // mensagem de erro e seu filtro
         }
 
         if(nome == "" || idade == "" || time == ""){
-            return res.status(400).send(`Campos obrigatórios não preenchidos!`)
+            return res.status(400).send(`Campos obrigatórios não preenchidos!`) //mensagem de campos vazios
         }
         
-        console.log(`Olá, ${nome}! Você tem ${idade} e torce para o ${time}`);
+        console.log(`Olá, ${nome}! Você tem ${idade} e torce para o ${time}`); // mensagem com os dados fornecidos
 
-        res.status(201).json({ message:`Usuário criado com sucesso!`})
+        res.status(201).json({ message:`Usuário criado com sucesso!`})// mensagem de sucesso
 
     } catch (error) {
         console.error("Erro capturado", error);
