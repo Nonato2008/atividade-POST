@@ -1,4 +1,4 @@
-// ATIVIDADE 1
+// ATIVIDADE 2
 
 const express = require('express');
 const app =  express();
